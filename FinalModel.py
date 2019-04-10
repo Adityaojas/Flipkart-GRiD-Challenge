@@ -62,48 +62,19 @@ with open("./images.txt") as f:
         id,path=line.split(" ",1)
         image=Image.open("./images/"+path).convert('RGB')
         id_to_size[int(id)]=np.array(image,dtype=np.float32).shape[0:2]
-        # print(np.size(image, 0))
-        # print(np.size(image, 1))
-        # print(np.size(image, 2))
         image=image.resize((220,220))
         image=np.array(image,dtype=np.float32)
         image=image/255
         image=Normalize(image,[0.485,0.456,0.406],[0.229,0.100,0.225])
         id_to_data[int(id)]=image
         print(id)
-        # if int(int(id)/11788) == int(id)/11788:
-        # print(int(int(id)/11788))
-        # fi = open("./id_to_data", "a+")
-        # fi.write(json.dumps(image.tolist()))
-
-        # pickle.dump(image, fi, protocol=4)
-        # image = np.array2string(image)
-        # # fi.write(image)
-        # # print(i)
-        # fi.close()
-        # print(np.size(image,0))
-        # print(np.size(image, 1))
-        # i+=1
-        # if i%10==0:
-        #     print(id_to_data[int(id)])
-id_to_data=np.array(list(id_to_data.values()))
+        id_to_data=np.array(list(id_to_data.values()))
 fi = open("./id_to_data", "wb+")
 pickle.dump(id_to_data, fi, protocol=4)
-# json.dump(id_to_data, fp=fi)
-# image = np.array2string(image)
-# fi.write(image)
-# print(i)
 fi.close()
 print("DOne1")
-# # id_to_data=np.array(list(id_to_data.values()))
-# # id_to_size=np.array(list(id_to_size.values()))
-# f=open("./id_to_data","wb+")
-# pickle.dump(id_to_data,f,protocol=4)
-# f.close()
 f=open("./id_to_size","wb+")
 pickle.dump(id_to_size,f,protocol=4)
-# id_to_size_file = np.array2string(id_to_size)
-# f.write(id_to_size)
 f.close()
 id_to_box={}
 print("DOne2")
@@ -121,8 +92,6 @@ print("DOne3")
 id_to_box=np.array(list(id_to_box.values()))
 f=open("./id_to_box","wb+")
 pickle.dump(id_to_box,f,protocol=4)
-# id_to_box = np.array2string(id_to_box)
-# f.write(id_to_box)
 f.close()
 print("DOne4")
 
@@ -132,75 +101,28 @@ id_to_size={}
 i=0
 open('./id_to_data_test', 'w+').close()
 open('./id_to_size_test', 'w+').close()
-# open('./id_to_box', 'w').close()
 with open("./images_test.txt") as f:
     lines=f.read().splitlines()
     for line in lines:
         id,path=line.split(" ",1)
         image=Image.open("./images/"+path).convert('RGB')
         id_to_size[int(id)]=np.array(image,dtype=np.float32).shape[0:2]
-        # print(np.size(image, 0))
-        # print(np.size(image, 1))
-        # print(np.size(image, 2))
         image=image.resize((110,110))
         image=np.array(image,dtype=np.float32)
         image=image/255
         image=Normalize(image,[0.485,0.456,0.406],[0.229,0.100,0.225])
         id_to_data[int(id)]=image
         print(id)
-        # if int(int(id)/11788) == int(id)/11788:
-        # print(int(int(id)/11788))
-        # fi = open("./id_to_data", "a+")
-        # fi.write(json.dumps(image.tolist()))
-
-        # pickle.dump(image, fi, protocol=4)
-        # image = np.array2string(image)
-        # # fi.write(image)
-        # # print(i)
-        # fi.close()
-        # print(np.size(image,0))
-        # print(np.size(image, 1))
-        # i+=1
-        # if i%10==0:
-        #     print(id_to_data[int(id)])
+    
 id_to_data=np.array(list(id_to_data.values()))
 fi = open("./id_to_data_test", "wb+")
 pickle.dump(id_to_data, fi, protocol=4)
-# json.dump(id_to_data, fp=fi)
-# image = np.array2string(image)
-# fi.write(image)
-# print(i)
 fi.close()
 print("DOne1")
-# # id_to_data=np.array(list(id_to_data.values()))
-# # id_to_size=np.array(list(id_to_size.values()))
-# f=open("./id_to_data","wb+")
-# pickle.dump(id_to_data,f,protocol=4)
-# f.close()
+
 f=open("./id_to_size_test","wb+")
 pickle.dump(id_to_size,f,protocol=4)
-# id_to_size_file = np.array2string(id_to_size)
-# f.write(id_to_size)
 f.close()
-# id_to_box={}
-# print("DOne2")
-# with open("./bounding_boxes.txt") as f:
-#     lines=f.read().splitlines()
-#     for line in lines:
-#         id,box=line.split(" ",1)
-#         box=np.array([float(i) for i in box.split(" ")],dtype=np.float32)
-#         box[0]=box[0]/id_to_size[int(id)][1]*110
-#         box[1]=box[1]/id_to_size[int(id)][0]*110
-#         box[2]=box[2]/id_to_size[int(id)][1]*110
-#         box[3]=box[3]/id_to_size[int(id)][0]*110
-#         id_to_box[int(id)]=box
-# print("DOne3")
-# id_to_box=np.array(list(id_to_box.values()))
-# f=open("./id_to_box","wb+")
-# pickle.dump(id_to_box,f,protocol=4)
-# id_to_box = np.array2string(id_to_box)
-# f.write(id_to_box)
-# f.close()
 print("DOne4")
 
 
